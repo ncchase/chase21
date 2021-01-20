@@ -30,15 +30,12 @@ for form in students:
         random_form = random.choice(students_temp)
 
         random_student = random.choice(random_form)
-
         while random_student not in picked_students:
-            
             
             random_student = random.choice(random_form)
             picked_students.append(random_student)
         
         player_runner_dict[student] = random_student
-
         print(picked_students, "picked students list 2")
     
 
