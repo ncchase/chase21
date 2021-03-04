@@ -1,6 +1,7 @@
 # Credentials
 credentials.py
 client_secret.json
+service_account.json
 
 # vscode
 .vscode
