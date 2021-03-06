@@ -5,6 +5,8 @@ service_account.json
 
 # vscode
 .vscode
+# Jetbrains IDEs; PyCharm/IntelliJ
+.idea
 
 # Environments
 .env
@@ -15,4 +17,7 @@ ENV/
 env.bak/
 venv.bak/
 
+# Python
+__pycache__
+.mypy_cache
 
