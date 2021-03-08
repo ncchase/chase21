@@ -7,7 +7,8 @@ from credentials import *
 gc = gspread.service_account(filename=service_account_filepath)
 masterSheet = gc.open_by_key(year9_spreadsheet_key)
 
-# worksheet = sh.worksheet("INSERT_WORKSHEET_NAME")
+# Example for getting worksheet by name:
+# worksheet = masterSheet.worksheet("INSERT_WORKSHEET_NAME")
 userList = masterSheet.get_worksheet(0)
 playerTarget = masterSheet.get_worksheet(1)
 
