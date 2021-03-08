@@ -2,11 +2,15 @@ import gspread
 import random
 from collections import deque
 from operator import itemgetter
+from credentials import *
 
-gc = gspread.oauth()
-masterSheet = gc.open_by_url('https://docs.google.com/spreadsheets/d/1-6fTPzP3Em48V1LU2sSgz23jEyG2TrKtTM1BW96nYUo/edit#gid=1234076362')
+gc = gspread.service_account(filename=service_account_filepath)
+masterSheet = gc.open_by_key(year9_spreadsheet_key)
+
+# worksheet = sh.worksheet("INSERT_WORKSHEET_NAME")
 userList = masterSheet.get_worksheet(0)
 playerTarget = masterSheet.get_worksheet(1)
+
 #playerInfo = [house, status]
 playerInfo = list(userList.get("F2:F206"))
 kowhais = []
