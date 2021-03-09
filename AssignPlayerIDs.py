@@ -2,11 +2,6 @@ from random import shuffle
 import gspread
 from credentials import *
 
-numberOfy9 = 0
-numberOfy10 = numberOfy9 + 0
-numberOfy11 = numberOfy10 + 0
-numberOfy12 = numberOfy11 + 0
-numberOfy13 = numberOfy12 + 0
 
 def AssignPlayerIDs():
     gc = gspread.service_account(filename=service_account_filepath)
@@ -16,6 +11,11 @@ def AssignPlayerIDs():
     YEAR11 = sh.worksheet("YEAR11")
     YEAR12 = sh.worksheet("YEAR12")
     YEAR13 = sh.worksheet("YEAR13")
+    numberOfy9 = YEAR9.row_count - 1
+    numberOfy10 = numberOfy9 + YEAR10.row_count - 1
+    numberOfy11 = numberOfy10 + YEAR11.row_count - 1
+    numberOfy12 = numberOfy11 + YEAR12.row_count - 1
+    numberOfy13 = numberOfy12 + YEAR13.row_count - 1
     As = ["A{}".format(i) for i in range(101, 500)]
     Bs = ["B{}".format(i) for i in range(101, 500)]
     Cs = ["C{}".format(i) for i in range(101, 500)]
