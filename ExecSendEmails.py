@@ -5,6 +5,7 @@ from email.mime.multipart import MIMEMultipart
 from credentials import *
 from datetime import datetime
 import time
+import sys
 
 # Signing into service account & allowing access
 gc = gspread.service_account(filename=service_account_9_filepath)
@@ -31,20 +32,22 @@ del IDS[0], emails[0], runner_names[0], runner_forms[0] # Removes headers
 html_email = """
 <h2>Exec Newlands College Chase 2021!</h2>
 <h4>Pegs must be clipped onto the body or clothing, not bags.</h4>
-<br>
 <p>To catch your runner, place a peg on them, then obtain their player ID.</p>
 <p><a href="https://sites.google.com/newlands.school.nz/nc-chase/home" target="_blank" rel="noopener">Detailed rules
     and more information at our website.</a></p><p>Remember to keep your Player ID secret!<p><p style="font-size: 1.5em;">Your Player ID is <span style="color: #ffffff;"><span style="background-color: #3e3874;"><strong>{player_id}</strong></span></span></p>
 <p style="font-size: 1.5em;">Your Runner is <span style="color: #ffffff; background-color: #3e3874;"><strong>{runner_name}</strong></span>&nbsp;from&nbsp;
 <span style="color: #ffffff;background-color: #3e3874;"><strong>{runner_form}</strong></span></p>
-<p>You can report that you have caught your runner on <a href="https://forms.gle/ma3xJxzku99TfeiF8">our 
-form.</a></p><p style="font-size:1.2em;">This email was sent automatically - for assistance, reply to this email or message us on Instagram
-    <a href="https://www.instagram.com/newlands.college.chase/">@newlands.college.chase</a></p>
+<p>When you catch your runner, get their Player ID then fill out <a href="https://forms.gle/ma3xJxzku99TfeiF8">our 
+form.</a></p>
+<br>
+<p style="font-size:1.2em;">This email was sent automatically - for assistance, reply to this email or message us on Instagram 
+<a href="https://www.instagram.com/newlands.college.chase/">@newlands.college.chase</a></p>
 <h3>Telling a friend could be telling the enemy, so keep your lips sealed! Good luck.</h3>
 """
 
 message = MIMEMultipart("alternative")
-message["Subject"] = "NC Chase21 -  " + day + " " + date + "/" + month
+# message["Subject"] = "NC Chase21 -  " + day + " " + date + "/" + month
+message["Subject"] = "NC Chase21 Exec - Wednesday 10/03"
 message["From"] = "Gamemaster <gamemaster@newlands.school.nz>"
 message["To"] = "Players <NC-Chase21>"
 # message["Reply-To"] = "Anomaly Support <different-address@anomaly.net.au>"
@@ -62,8 +65,11 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         if person % 30 == 0:
             time.sleep(30)
         
-        # receiver_email = "techcrew3@newlands.school.nz"
-        receiver_email = emails[person]
+        if sys.argv[1] == "--test":
+            receiver_email = "techcrew3@newlands.school.nz"
+        else:
+            receiver_email = emails[person]
+
         player_id = IDS[person]
         runner_name = runner_names[person]
         runner_form = runner_forms[person]
