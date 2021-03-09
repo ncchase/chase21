@@ -8,9 +8,9 @@ import time
 
 # Signing into service account & allowing access
 gc = gspread.service_account(filename=service_account_filepath)
-worksheet = gc.open_by_key("18-Zpykkx5VGWbcIkjQw0sJEKmLFKE_7Rcj-Ri00_xsk")
+worksheet = gc.open_by_key("1-kFRYyEQ3QvRFi7JouYUiqkjHY6eQbivMfPFN7jPYm4")
 # Fetching sheet
-student_sheet = worksheet.worksheet("MUT")
+student_sheet = worksheet.worksheet("EXEC")
 
 # Sender information & password
 sender_email = "gamemaster@newlands.school.nz"
