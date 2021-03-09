@@ -5,11 +5,11 @@ from email.mime.multipart import MIMEMultipart
 from credentials import *
 from datetime import datetime
 import time
-import sys
 
 # Signing into service account & allowing access
 gc = gspread.service_account(filename=service_account_9_filepath)
 worksheet = gc.open_by_key("1-kFRYyEQ3QvRFi7JouYUiqkjHY6eQbivMfPFN7jPYm4")
+worksheet = gc.open_by_key(spreadsheet_key)
 # Fetching sheet
 student_sheet = worksheet.worksheet("EXEC")
 
@@ -23,6 +23,7 @@ now = datetime.now()  # current date and time
 date = now.strftime("%d")
 month = now.strftime("%m")
 day = now.strftime("%A")
+# Getting Values from Sheet
 IDS = student_sheet.col_values(1)
 emails = student_sheet.col_values(6)
 runner_names = student_sheet.col_values(7)
@@ -55,9 +56,9 @@ message["To"] = "Players <NC-Chase21>"
 
 print("Emails sending now...")
 
-context = ssl.create_default_context()
+context = ssl.create_default_context() # Create Context for server.
 with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-    server.ehlo_or_helo_if_needed()
+    server.ehlo_or_helo_if_needed() # Greet the server.
     # server.starttls() # Establish Secure Connection with server
     server.login(sender_email, sender_password)
     for person in range(len(emails)):
