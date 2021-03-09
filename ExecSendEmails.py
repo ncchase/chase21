@@ -9,12 +9,13 @@ import time
 # Signing into service account & allowing access
 gc = gspread.service_account(filename=service_account_9_filepath)
 worksheet = gc.open_by_key("1-kFRYyEQ3QvRFi7JouYUiqkjHY6eQbivMfPFN7jPYm4")
-worksheet = gc.open_by_key(spreadsheet_key)
+# worksheet = gc.open_by_key(spreaadsheet_key)
+
 # Fetching sheet
 student_sheet = worksheet.worksheet("EXEC")
 
 # Sender information & password
-sender_email = "gamemaster@newlands.school.nz"
+sender_email = email_address
 sender_password = email_password
 
 # Creating variables
@@ -23,11 +24,12 @@ now = datetime.now()  # current date and time
 date = now.strftime("%d")
 month = now.strftime("%m")
 day = now.strftime("%A")
-# Getting Values from Sheet
-IDS = student_sheet.col_values(1)
+# Getting Values from Sheet. NOTE NUMBERS ARE 1 BASED.
+IDS = student_sheet.col_values(1) 
 emails = student_sheet.col_values(6)
 runner_names = student_sheet.col_values(7)
 runner_forms = student_sheet.col_values(9)
+
 del IDS[0], emails[0], runner_names[0], runner_forms[0] # Removes headers
 
 html_email = """
