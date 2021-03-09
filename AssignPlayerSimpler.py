@@ -7,38 +7,29 @@ from credentials import *
 gc = gspread.service_account(filename=service_account_filepath)
 masterSheet = gc.open_by_key(year9_spreadsheet_key)
 
+workSheetName = ""
+numberOfPlayers = 0
+
 # Example for getting worksheet by name:
 # worksheet = masterSheet.worksheet("INSERT_WORKSHEET_NAME")
-userList = masterSheet.get_worksheet(0)
-playerTarget = masterSheet.get_worksheet(1)
+userList = masterSheet.worksheet(workSheetName)
 
-#playerInfo = [house, status]
-playerInfo = list(userList.get("F2:F206"))
-kowhais = []
-matais = []
-rimus = []
-totaras = []
-notAlive = []
+playerInfo = list(userList.get("F2:F{}".format(numberOfPlayers + 1)))
+kowhai13 = []
+matai13 = []
+rimu13 = []
+totara13 = []
+kowhai12, matai12, rimu12, totara12 = [], [], [], []
+kowhai11, matai11, rimu11, totara11 = [], [], [], []
+kowhai10, matai10, rimu10, totara10 = [], [], [], []
+kowhai9, matai9, rimu9, totara9 = [], [], [], []
 
-def assignId():
-    "Assign Id to players and put alive players into their house, record dead's position"
-    #shuffle the array and so the chaser id will be random in the next step
-    random.shuffle(playerInfo)
-    selfId = 101
-    #playerInfo = [house, status, self ID, # of chasers]
+
+def houseDivision():
+    "Put players into their house group"
     for player in playerInfo:
-        player.append(selfId)
-        selfId += 1
-        player.append(0)
-        # put players into respect house group for assigning runner later
-        if player[0] == "Kowhai":
-            kowhais.append(player)
-        elif player[0] == "Matai":
-            matais.append(player)
-        elif player[0] == "Rimu":
-            rimus.append(player)
-        else:
-            totaras.append(player)
+        if player[]
+
 
 def result():
     #create a deque for fast changing player pool values
