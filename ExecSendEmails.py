@@ -67,6 +67,7 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         
         if sys.argv[1] == "--test":
             receiver_email = "techcrew3@newlands.school.nz"
+            print("TESTING. SENDING ONLY TO techcrew3@newlands.school.nz\nUse Ctrl+C to exit script.")
         else:
             receiver_email = emails[person]
 
