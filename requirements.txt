@@ -1,1 +1,2 @@
 gspread
+discord_webhook
