@@ -55,6 +55,7 @@ print("Emails sending now...")
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
     server.ehlo_or_helo_if_needed()
+    # server.starttls() # Establish Secure Connection with server
     server.login(sender_email, sender_password)
     for person in range(len(emails)):
         
