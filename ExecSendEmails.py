@@ -65,6 +65,7 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         if person % 30 == 0:
             time.sleep(30)
 
+        receiver_email = emails[person]
         player_id = IDS[person]
         runner_name = runner_names[person]
         runner_form = runner_forms[person]
