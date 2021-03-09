@@ -23,10 +23,10 @@ date = now.strftime("%d")
 month = now.strftime("%m")
 day = now.strftime("%A")
 IDS = student_sheet.col_values(1)
-emails = student_sheet.col_values(2)
-runner_names = student_sheet.col_values(3)
-runner_forms = student_sheet.col_values(4)
-del IDS[0], emails[0], runner_names[0], runner_forms[0]
+emails = student_sheet.col_values(6)
+runner_names = student_sheet.col_values(7)
+runner_forms = student_sheet.col_values(9)
+del IDS[0], emails[0], runner_names[0], runner_forms[0] # Removes headers
 
 html_email = """
 <h2>Exec Newlands College Chase 2021!</h2>
