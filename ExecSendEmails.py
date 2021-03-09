@@ -78,32 +78,4 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
         )
         print("Email sent to " + receiver_email)
 
-# for person in range(len(emails)):
-
-#     """!!! !!! !!! DO NOT REMOVE Rest period."""
-#     if person % 30 == 0:
-
-#         time.sleep(30)
-
-#     # receiver_email = emails[person]
-#     # Below line for testing Email format.
-#     receiver_email = "techcrew3@newlands.school.nz"
-#     player_ID = IDS[person]
-#     target_name = target_names[person]
-#     target_form = target_forms[person]
-
- 
-
-#     # Email contents
-
-
-#     part_html = MIMEText(email, "html")
-#     message.attach(part_html)
-
-
-
-# # Print final result
-
-# print(str(person + 1) + " emails sent")
-# # Turn these into plain/html MIMEText objects
-
+print(str(person + 1) + " emails sent")
