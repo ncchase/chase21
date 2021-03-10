@@ -38,8 +38,7 @@ html_email = """
 <p>To catch your runner, place a peg on them, then obtain their player ID.</p>
 <p><a href="https://sites.google.com/newlands.school.nz/nc-chase/home" target="_blank" rel="noopener">Detailed rules
     and more information at our website.</a></p><p>Remember to keep your Player ID secret!<p><p style="font-size: 1.5em;">Your Player ID is <span style="color: #ffffff;"><span style="background-color: #3e3874;"><strong>{player_id}</strong></span></span></p>
-<p style="font-size: 1.5em;">Your Runner is <span style="color: #ffffff; background-color: #3e3874;"><strong>{runner_name}</strong></span>&nbsp;from&nbsp;
-<span style="color: #ffffff;background-color: #3e3874;"><strong>{runner_form}</strong></span></p>
+<p style="font-size: 1.5em;">Your Runner is <span style="color: #ffffff; background-color: #3e3874;"><strong>{runner_name}</strong></span>&nbsp;from&nbsp;<span style="color: #ffffff;background-color: #3e3874;"><strong>{runner_form}</strong></span></p>
 <p>When you catch your runner, get their Player ID then fill out <a href="https://forms.gle/ma3xJxzku99TfeiF8">our 
 form.</a></p>
 <br>
@@ -49,8 +48,8 @@ form.</a></p>
 """
 
 message = MIMEMultipart("alternative")
-message["Subject"] = "NC Chase21 Exec -  " + day + " " + date + "/" + month
-# message["Subject"] = "NC Chase21 Exec - Wednesday 10/03"
+# message["Subject"] = "NC Chase21 Exec -  " + day + " " + date + "/" + month
+message["Subject"] = "NC Chase21 Exec - Friday 12/03"
 message["From"] = "Gamemaster <gamemaster@newlands.school.nz>"
 message["To"] = "Players <NC-Chase21>"
 # message["Reply-To"] = "Anomaly Support <different-address@anomaly.net.au>"
@@ -66,7 +65,7 @@ with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
     for person in range(len(emails)):
         
         if person % 30 == 0:
-            time.sleep(30)
+            time.sleep(35)
 
         receiver_email = emails[person]
         player_id = IDS[person]
