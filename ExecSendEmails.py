@@ -49,7 +49,7 @@ form.</a></p>
 
 message = MIMEMultipart("alternative")
 # message["Subject"] = "NC Chase21 Exec -  " + day + " " + date + "/" + month
-message["Subject"] = "NC Chase21 Exec - Thursday 11/03"
+message["Subject"] = "NC Chase21 Exec - Friday 12/03"
 message["From"] = "Gamemaster <gamemaster@newlands.school.nz>"
 message["To"] = "Players <NC-Chase21>"
 # message["Reply-To"] = "Anomaly Support <different-address@anomaly.net.au>"
