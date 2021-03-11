@@ -2,13 +2,13 @@ import gspread
 import random
 from collections import deque
 from operator import itemgetter
-from credentials import *
+from example_credentials import *
 
-gc = gspread.service_account(filename=service_account_filepath)
-masterSheet = gc.open_by_key(year9_spreadsheet_key)
+gc = gspread.service_account(filename = service_account_filepath)
+masterSheet = gc.open_by_key(spreadSheetKey)
 
-workSheetName = ""
-numberOfPlayers = 0
+workSheetName = "YEAR9"
+numberOfPlayers = 80
 
 # Example for getting worksheet by name:
 # worksheet = masterSheet.worksheet("INSERT_WORKSHEET_NAME")
@@ -21,6 +21,7 @@ rimu = []
 totara = []
 allPlayer = []
 houseOrder = []
+print(playerInfo)
 
 def houseDivision():
     "Put players into their house group"
@@ -80,3 +81,6 @@ def assignRunner():
             # the pointer was pointing to 
             # has been assigned as a runner
             pointer -= 1
+    print(allPlayer)
+houseDivision()
+assignRunner()
