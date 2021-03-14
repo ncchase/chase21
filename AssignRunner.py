@@ -21,7 +21,6 @@ rimu = []
 totara = []
 allPlayer = []
 houseOrder = []
-print(playerInfo)
 
 def houseDivision():
     "Put players into their house group"
@@ -47,16 +46,27 @@ def houseDivision():
     #add the houses together, sort by the number of the players in the house
     allPlayer = [rimu, matai, kowhai, totara]
     allPlayer = sorted(allPlayer, key = len, reverse = True)
-    houseOrder = ["Kowhai", "Rimu", "Matai", "Totara"]
+    # sort house name by the number of players in the house
+    houseOrder = {
+        "rimu": len(rimu),
+        "matai": len(matai),
+        "kowhai": len(kowhai),
+        "totara": len(totara)
+    }
+    # sort the dictionary by the number of players, then return a list of house names
+    houseOrder = [k for k, v in sorted(houseOrder.items(), key = itemgetter(1), reverse = True)]
+    print(houseOrder)
+    return allPlayer, houseOrder
 
 
 def assignRunner():
     'draw pkayers from the playerInfo of the house'
+    allPlayer, houseOrder = houseDivision()
     houseNum = 0
     for house in allPlayer:
         # the name of the house is corresponding to the current house list
         houseName = houseOrder[houseNum]
-        houseNum += 1   
+        houseNum += 1
         # shuffle the players so the runner is randomized
         # player = [ID, first, last, email, form, house, position, # of chasers]
         random.shuffle(playerInfo)
@@ -68,7 +78,7 @@ def assignRunner():
         pointer = -1
         for player in house:
             # look for players not in their house
-            while playerInfo[pointer][5] == houseName:
+            while playerInfo[pointer][5] == houseName or playerInfo[pointer][-1] == player[0] :
                 # move pointer to the left
                 pointer -= 1
             # when we locate the pointer, we add 1 to the
@@ -81,6 +91,8 @@ def assignRunner():
             # the pointer was pointing to 
             # has been assigned as a runner
             pointer -= 1
-    print(allPlayer)
-houseDivision()
+    playerInfo.sort(key = itemgetter(6))
+    result = [i[0:5] + [i[8]] for i in playerInfo]
+    for i in result:
+        print(i)
 assignRunner()
