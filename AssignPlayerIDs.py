@@ -1,6 +1,10 @@
 from random import shuffle
 import gspread
+<<<<<<< Updated upstream
 from credentials import *
+=======
+from example_credentials import spreadSheetKey, service_account_filepath
+>>>>>>> Stashed changes
 
 numberOfy9 = 0
 numberOfy10 = numberOfy9 + 0
