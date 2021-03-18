@@ -1,6 +1,6 @@
 from random import shuffle
 import gspread
-from example_credentials import *
+from example_credentials import spreadSheetKey, service_account_filepath
 
 
 def AssignPlayerIDs():

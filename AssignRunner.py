@@ -2,27 +2,12 @@ import gspread
 import random
 from collections import deque
 from operator import itemgetter
-from example_credentials import *
+from example_credentials import service_account_filepath, spreadSheetKey
 
 gc = gspread.service_account(filename = service_account_filepath)
 masterSheet = gc.open_by_key(spreadSheetKey)
 
-workSheetName = "YEAR9"
-numberOfPlayers = 80
-
-# Example for getting worksheet by name:
-# worksheet = masterSheet.worksheet("INSERT_WORKSHEET_NAME")
-userList = masterSheet.worksheet(workSheetName)
-
-playerInfo = list(userList.get("A2:F{}".format(numberOfPlayers + 1)))
-kowhai = []
-matai = []
-rimu = []
-totara = []
-allPlayer = []
-houseOrder = []
-
-def houseDivision():
+def houseDivision(playerInfo):
     "Put players into their house group"
     # player = [ID, first, last, email, form, house, position, # of chasers]
     # use to track the position of the player in the sheet
@@ -31,6 +16,11 @@ def houseDivision():
     # use to track how many other players are chasing the player
     # default value for everyone is 0 i.e. no one's chasing them
     chaser = 0
+    kowhai = []
+    matai = []
+    rimu = []
+    totara = []
+    houseOrder = []
     for player in playerInfo:
         player.append(position)
         position += 1
@@ -55,13 +45,14 @@ def houseDivision():
     }
     # sort the dictionary by the number of players, then return a list of house names
     houseOrder = [k for k, v in sorted(houseOrder.items(), key = itemgetter(1), reverse = True)]
-    print(houseOrder)
-    return allPlayer, houseOrder
+    perfectGame = len(allPlayer[0]) < len(allPlayer[1] + allPlayer[2] + allPlayer[3])
+    return allPlayer, houseOrder, perfectGame
 
-
-def assignRunner():
-    'draw pkayers from the playerInfo of the house'
-    allPlayer, houseOrder = houseDivision()
+def assignRunner(workSheetName, numberOfPlayers):
+    'assign runner to chaser'
+    userList = masterSheet.worksheet(workSheetName)
+    playerInfo = list(userList.get("A2:F{}".format(numberOfPlayers + 1)))
+    allPlayer, houseOrder, perfectGame = houseDivision(playerInfo)
     houseNum = 0
     for house in allPlayer:
         # the name of the house is corresponding to the current house list
@@ -86,13 +77,16 @@ def assignRunner():
             # a player chasing after them
             playerInfo[pointer][7] += 1
             # add the ID of the runner to the chasers list
-            player.append(playerInfo[pointer][0])
+            player.insert(8, playerInfo[pointer][0])
+            playerInfo[pointer].append(player[6])
             # move the pointer left because the player 
             # the pointer was pointing to 
             # has been assigned as a runner
             pointer -= 1
     playerInfo.sort(key = itemgetter(6))
-    result = [i[0:5] + [i[8]] for i in playerInfo]
-    for i in result:
-        print(i)
-assignRunner()
+    for i in playerInfo:
+        if i[7] != 1:
+            perfectGame = False
+            break
+    # userList.update("G2:G1000", [[i[8]] for i in playerInfo])
+    return perfectGame
