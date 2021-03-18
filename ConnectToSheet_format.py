@@ -1,5 +1,5 @@
 import gspread
-from credentials import *
+from example_credentials import *
 
 def EXAMPLE(year):
     if year == 9:

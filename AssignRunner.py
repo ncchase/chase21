@@ -2,10 +2,10 @@ import gspread
 import random
 from collections import deque
 from operator import itemgetter
-from example_credentials import service_account_filepath, spreadSheetKey
+from credentials import *
 
-gc = gspread.service_account(filename = service_account_filepath)
-masterSheet = gc.open_by_key(spreadSheetKey)
+# gc = gspread.service_account(filename = service_account_filepath)
+# masterSheet = gc.open_by_key(spreadSheetKey)
 
 def houseDivision(playerInfo):
     "Put players into their house group"
@@ -48,9 +48,39 @@ def houseDivision(playerInfo):
     perfectGame = len(allPlayer[0]) < len(allPlayer[1] + allPlayer[2] + allPlayer[3])
     return allPlayer, houseOrder, perfectGame
 
-def assignRunner(workSheetName, numberOfPlayers):
+def assignRunner(year):
+    if year == 9:
+        gc = gspread.service_account(filename=service_account_9_filepath)
+        sh = gc.open_by_key(spreadsheet_key)
+        userList = sh.worksheet("YEAR9")
+        numberOfPlayers = len(userList.col_values(2))
+
+    elif year == 10:
+        gc = gspread.service_account(filename=service_account_10_filepath)
+        sh = gc.open_by_key(spreadsheet_key)
+        userList = sh.worksheet("YEAR10")
+        numberOfPlayers = len(userList.col_values(2))
+
+    elif year == 11:
+        gc = gspread.service_account(filename=service_account_11_filepath)
+        sh = gc.open_by_key(spreadsheet_key)
+        userList = sh.worksheet("YEAR11")
+        numberOfPlayers = len(userList.col_values(2))
+
+    elif year == 12:
+        gc = gspread.service_account(filename=service_account_12_filepath)
+        sh = gc.open_by_key(spreadsheet_key)
+        userList = sh.worksheet("YEAR12")
+        numberOfPlayers = len(userList.col_values(2))
+
+    elif year == 13:
+        gc = gspread.service_account(filename=service_account_13_filepath)
+        sh = gc.open_by_key(spreadsheet_key)
+        userList = sh.worksheet("YEAR13")  
+        numberOfPlayers = len(userList.col_values(2))
+
     'assign runner to chaser'
-    userList = masterSheet.worksheet(workSheetName)
+
     playerInfo = list(userList.get("A2:F{}".format(numberOfPlayers + 1)))
     allPlayer, houseOrder, perfectGame = houseDivision(playerInfo)
     houseNum = 0
