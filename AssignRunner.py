@@ -48,31 +48,36 @@ def houseDivision(playerInfo):
     perfectGame = len(allPlayer[0]) < len(allPlayer[1] + allPlayer[2] + allPlayer[3])
     return allPlayer, houseOrder, perfectGame
 
-def assignRunner(year, numberOfPlayers):
+def assignRunner(year):
     if year == 9:
         gc = gspread.service_account(filename=service_account_9_filepath)
         sh = gc.open_by_key(spreadsheet_key)
         userList = sh.worksheet("YEAR9")
+        numberOfPlayers = len(userList.col_values(2))
 
     elif year == 10:
         gc = gspread.service_account(filename=service_account_10_filepath)
         sh = gc.open_by_key(spreadsheet_key)
         userList = sh.worksheet("YEAR10")
+        numberOfPlayers = len(userList.col_values(2))
 
     elif year == 11:
         gc = gspread.service_account(filename=service_account_11_filepath)
         sh = gc.open_by_key(spreadsheet_key)
         userList = sh.worksheet("YEAR11")
+        numberOfPlayers = len(userList.col_values(2))
 
     elif year == 12:
         gc = gspread.service_account(filename=service_account_12_filepath)
         sh = gc.open_by_key(spreadsheet_key)
         userList = sh.worksheet("YEAR12")
+        numberOfPlayers = len(userList.col_values(2))
 
     elif year == 13:
         gc = gspread.service_account(filename=service_account_13_filepath)
         sh = gc.open_by_key(spreadsheet_key)
         userList = sh.worksheet("YEAR13")  
+        numberOfPlayers = len(userList.col_values(2))
 
     'assign runner to chaser'
 
