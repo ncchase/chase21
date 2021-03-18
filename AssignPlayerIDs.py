@@ -1,10 +1,6 @@
 from random import shuffle
 import gspread
-<<<<<<< Updated upstream
 from credentials import *
-=======
-from example_credentials import spreadSheetKey, service_account_filepath
->>>>>>> Stashed changes
 
 numberOfy9 = 0
 numberOfy10 = numberOfy9 + 0
@@ -32,8 +28,8 @@ def AssignPlayerIDs():
     YEAR12.update("A2:A{}".format(numberOfy12 + 1), allID[numberOfy11:numberOfy12])
     YEAR13.update("A2:A{}".format(numberOfy13 + 1), allID[numberOfy13:numberOfy9])
 
-confirmation = input("Are you sure you want to assign Player IDs? This will overwrite the existing IDs.\nTHIS IS IRREVERSIBLE\nYES or NO\n")
 
+confirmation = input("Are you sure you want to assign Player IDs? This will overwrite the existing IDs.\nTHIS IS IRREVERSIBLE\nYES or NO\n")
 if confirmation == "YES":
     AssignPlayerIDs()
 else:
