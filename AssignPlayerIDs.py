@@ -1,21 +1,23 @@
 from random import shuffle
 import gspread
-from example_credentials import spreadSheetKey, service_account_filepath
-
+from credentials import *
 
 def AssignPlayerIDs():
-    gc = gspread.service_account(filename = service_account_filepath, scopes = gspread.auth.DEFAULT_SCOPES)
-    sh = gc.open_by_key(spreadSheetKey)
+    gc = gspread.service_account(filename = service_account_9_filepath, scopes = gspread.auth.DEFAULT_SCOPES)
+    sh = gc.open_by_key(spreadsheet_key)
     YEAR9 = sh.worksheet("YEAR9")
     YEAR10 = sh.worksheet("YEAR10")
     YEAR11 = sh.worksheet("YEAR11")
     YEAR12 = sh.worksheet("YEAR12")
     YEAR13 = sh.worksheet("YEAR13")
-    NOY9 = 80
-    NOY10 = 80
-    NOY11 = 80
-    NOY12 = 80
-    NOY13 = 80
+    # NOY9 = 80
+    # NOY10 = 80
+    # NOY11 = 80
+    # NOY12 = 80
+    # NOY13 = 80
+
+    """NOTE TODO, GET NUMBER OF EACH YEAR AUTOMATICALLY FROM SHEET"""
+
     pre = 0
     As = [["A{}".format(i)] for i in range(101, 500)]
     Bs = [["B{}".format(i)] for i in range(101, 500)]
