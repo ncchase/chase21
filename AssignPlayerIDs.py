@@ -3,8 +3,12 @@ import gspread
 from credentials import *
 
 def AssignPlayerIDs():
+
+    # Accessing spreadsheet
     gc = gspread.service_account(filename=service_account_9_filepath)
     sh = gc.open_by_key(spreadsheet_key)
+    
+    # Assigning sheets to arrays dependent on year group
     YEAR9 = sh.worksheet("YEAR9")
     YEAR10 = sh.worksheet("YEAR10")
     YEAR11 = sh.worksheet("YEAR11")
@@ -43,5 +47,7 @@ confirmation = input("Are you sure you want to assign Player IDs? This will over
 
 if confirmation == "YES":
     AssignPlayerIDs()
+    print("Player ID Assign Complete")
 else:
     print("Cancelled")
+
