@@ -25,25 +25,6 @@ def AssignPlayerIDs():
     for letter in list_of_letters:
         new_letter_list = [[letter + "{}".format(i)] for i in range(101, 500)]
         all_id_list += new_letter_list
-    
-    # Bs = [["B{}".format(i)] for i in range(101, 500)]
-    # Cs = [["C{}".format(i)] for i in range(101, 500)]
-    # Ds = [["D{}".format(i)] for i in range(101, 500)]
-    # Es = [["E{}".format(i)] for i in range(101, 500)]
-    # Fs = [["F{}".format(i)] for i in range(101, 500)]
-    # Gs = [["G{}".format(i)] for i in range(101, 500)]
-    # Hs = [["H{}".format(i)] for i in range(101, 500)]
-    # # I, J skipped
-    # Ks = [["K{}".format(i)] for i in range(101, 500)]
-    # # L skipped
-    # Ms = [["M{}".format(i)] for i in range(101, 500)]
-    # # N, O, P, Q skipped
-    # Rs = [["R{}".format(i)] for i in range(101, 500)]
-    # # S skipped
-    # Ts = [["T{}".format(i)] for i in range(101, 500)]
-    # # U, V, W skipped
-    # Xs = [["X{}".format(i)] for i in range(101, 500)]
-    # allID = As + Bs + Cs + Ds + Es + Fs + Gs
 
     shuffle(all_id_list)
     
@@ -58,7 +39,8 @@ def AssignPlayerIDs():
     YEAR13.update("A2:A{}".format(NOY13 + 1), all_id_list[pre:NOY13 + pre])
 
     
-confirmation = input("Are you sure you want to assign Player IDs? This will overwrite the existing IDs.\nTHIS IS IRREVERSIBLE\nYES or NO\n")
+confirmation = input("Are you sure you want to assign Player IDs? This will overwrite the existing IDs.\nTHIS IS IRREVERSIBLE\nYES or NO\n\n")
+
 if confirmation == "YES":
     AssignPlayerIDs()
 else:
