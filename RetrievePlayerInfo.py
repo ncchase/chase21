@@ -6,7 +6,6 @@ import numpy as np
 def Retrieveinfo(players_to_retrieve):
 
     # Accessing spreadsheet using random service account (keeps read limit load relatively even)
-
     service_acc_num = random.randint(1,5)
     if service_acc_num == 1:
         gc = gspread.service_account(filename=service_account_9_filepath)
@@ -20,7 +19,6 @@ def Retrieveinfo(players_to_retrieve):
         gc = gspread.service_account(filename=service_account_13_filepath)
     sh = gc.open_by_key(spreadsheet_key)
     
-
     # Creating (numpy) array of all players (includes all removed players)
     players = np.array([])
     for year in range(9,14):
@@ -44,6 +42,7 @@ def Retrieveinfo(players_to_retrieve):
 
     playerID_list = list(players[:,0])
 
+    # Iterating through ID's given, finding matching index within sheet and printing all data from that index
     for ID in players_to_retrieve:
         if ID in playerID_list:
             player_index = playerID_list.index(ID)
@@ -55,10 +54,12 @@ def Retrieveinfo(players_to_retrieve):
     print("\nDone")
 
 if __name__ =="__main__":
+    
     print("Please enter valid ID's and then press enter, type 'f' when complete.")
     players_to_retrieve = []
     id = "D"
 
+    # Taking input
     while id.lower() != "f":
         id = input("")
         players_to_retrieve.append(id)
@@ -67,3 +68,5 @@ if __name__ =="__main__":
 
     if len(players_to_retrieve) > 0:
         Retrieveinfo(players_to_retrieve)
+    else:
+        print("No player ID's were entered")
