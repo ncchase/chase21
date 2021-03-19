@@ -1,4 +1,3 @@
 gspread
 discord_webhook
 numpy
-random
