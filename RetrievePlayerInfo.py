@@ -1,6 +1,5 @@
 import gspread
 from credentials import *
-import timeit
 import random
 import numpy as np
 
@@ -46,27 +45,25 @@ def Retrieveinfo(players_to_retrieve):
     playerID_list = list(players[:,0])
 
     for ID in players_to_retrieve:
-
         if ID in playerID_list:
             player_index = playerID_list.index(ID)
-            print(players[player_index,:])
-        
+            print("\n")
+            print(list(players[player_index,:]))     
         else:
-            print(ID + " is not a valid ID")
+            print("\n" + ID + " is not a valid ID")
 
-    print("\n Done")
+    print("\nDone")
 
-print("Please enter valid ID's and then press enter, type 'f' when complete.")
+if __name__ =="__main__":
+    print("Please enter valid ID's and then press enter, type 'f' when complete.")
+    players_to_retrieve = []
+    id = "D"
 
-players_to_retrieve = []
-id = "d"
+    while id.lower() != "f":
+        id = input("")
+        players_to_retrieve.append(id)
 
-while id.lower() != "f":
-
-    id = input("")
-    players_to_retrieve.append(id)
-
-if len(players_to_retrieve) > 0:
     players_to_retrieve.remove("f")
 
-Retrieveinfo(players_to_retrieve)
+    if len(players_to_retrieve) > 0:
+        Retrieveinfo(players_to_retrieve)
