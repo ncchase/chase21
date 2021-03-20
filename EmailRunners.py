@@ -103,9 +103,3 @@ def EmailRunners(year):
             print("Email sent to " + receiver_email)
 
     print(str(person + 1) + " emails sent")
-
-
-def PunishmentEmail(ID):
-    # Signing into service account & allowing access
-
-    """ SOMEHOW GET INFO FROM ID"""
