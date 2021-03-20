@@ -70,3 +70,4 @@ if __name__ =="__main__":
         Retrieveinfo(players_to_retrieve)
     else:
         print("No player ID's were entered")
+
