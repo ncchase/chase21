@@ -17,18 +17,8 @@ def Retrieveinfo():
 
     players_to_retrieve.remove("f")
 
-    # Accessing spreadsheet using random service account (keeps read limit load relatively even)
-    service_acc_num = random.randint(1,5)
-    if service_acc_num == 1:
-        gc = gspread.service_account(filename=service_account_9_filepath)
-    elif service_acc_num == 2:
-        gc = gspread.service_account(filename=service_account_10_filepath)
-    elif service_acc_num == 3:
-        gc = gspread.service_account(filename=service_account_11_filepath)
-    elif service_acc_num == 4:
-        gc = gspread.service_account(filename=service_account_12_filepath)
-    elif service_acc_num == 5:
-        gc = gspread.service_account(filename=service_account_13_filepath)
+    # Signing into service account & allowing access
+    gc = gspread.service_account(filename=service_account_10_filepath)
     sh = gc.open_by_key(spreadsheet_key)
     
     # Creating (numpy) array of all players (includes all removed players)
