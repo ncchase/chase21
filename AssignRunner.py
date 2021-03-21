@@ -1,8 +1,7 @@
 import gspread
 import random
-from collections import deque
 from operator import itemgetter
-from credentials import *
+from example_credentials import *
 
 # gc = gspread.service_account(filename = service_account_filepath)
 # masterSheet = gc.open_by_key(spreadSheetKey)
@@ -118,5 +117,7 @@ def assignRunner(year):
         if i[7] != 1:
             perfectGame = False
             break
-    # userList.update("G2:G1000", [[i[8]] for i in playerInfo])
+    userList.update("G2:G1000", [[i[8]] for i in playerInfo])
     return perfectGame
+
+assignRunner(9)
