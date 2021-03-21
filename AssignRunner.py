@@ -1,10 +1,7 @@
 import gspread
 import random
 from operator import itemgetter
-from example_credentials import *
-
-# gc = gspread.service_account(filename = service_account_filepath)
-# masterSheet = gc.open_by_key(spreadSheetKey)
+from credentials import *
 
 def houseDivision(playerInfo):
     "Put players into their house group"
@@ -120,4 +117,9 @@ def assignRunner(year):
     userList.update("G2:G1000", [[i[8]] for i in playerInfo])
     return perfectGame
 
-assignRunner(9)
+if __name__ == "__main__":
+    assignRunner(9)
+    # assignRunner(10)
+    # assignRunner(11)
+    # assignRunner(12)
+    # assignRunner(13)
