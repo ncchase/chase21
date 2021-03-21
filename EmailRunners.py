@@ -93,10 +93,8 @@ def EmailRunners(year):
             runner_full_name = runner_first_name + runner_last_name
 
             part_html = MIMEText(html_email.format(runner_form=runner_form, runner_full_name=runner_full_name,player_id=player_id), "html")
-            # part_plain = MIMEText(plain_email.format(runner_form=runner_form, runner_name=runner_name,player_id=player_id), "plain")
 
             message.attach(part_html)
-            # message.attach(part_plain)
 
             server.sendmail(email_address, receiver_email, message.as_string())
 
