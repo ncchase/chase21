@@ -5,6 +5,7 @@ from email.mime.multipart import MIMEMultipart
 from credentials import *
 from datetime import datetime
 import time
+import Logging
 
 def EmailRunners(year):
     # Signing into service account & allowing access
@@ -97,6 +98,6 @@ def EmailRunners(year):
 
             server.sendmail(email_address, receiver_email, message.as_string())
 
-            print("Email sent to " + receiver_email)
-
-    print(str(person + 1) + " emails sent")
+            # print("Email sent to " + receiver_email)
+    # print(str(person + 1) + " emails sent")
+    Logging.complete("EmailRunners.py", year, str(person+1) + " emails sent")

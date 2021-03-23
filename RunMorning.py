@@ -1,6 +1,8 @@
 import AssignRunner
 import Emails
-# import Logging
+import Logging
+
+Logging.initialised("RunMorning.py")
 
 AssignRunner.assignRunner(9)
 AssignRunner.assignRunner(10)
