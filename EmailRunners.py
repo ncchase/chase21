@@ -43,18 +43,22 @@ def EmailRunners(year):
     del IDS[0], emails[0], runner_first_names[0], runner_last_names[0], runner_forms[0]
 
     html_email = """
-    <h2>Exec Newlands College Chase 2021!</h2>
-    <h4>Pegs must be clipped onto the body or clothing, not bags.</h4>
-    <p>To catch your runner, place a peg on them, then obtain their player ID.</p>
-    <p><a href="https://sites.google.com/newlands.school.nz/nc-chase/home" target="_blank" rel="noopener">Detailed rules and more information at our website.</a></p>
-    <p>Remember to keep your Player ID secret!<p>
+    <h1>Newlands College Chase 2021</h1>
     <p style="font-size: 1.5em;">Your Player ID is <span style="color: #ffffff; background-color: #3e3874;"><strong>{player_id}</strong></span></p>
-    <p style="font-size: 1.5em;">Your Runner is <span style="color: #ffffff; background-color: #3e3874;"><strong>{runner_full_name}</strong></span>&nbsp;from&nbsp;<span style="color: #ffffff;background-color: #3e3874;"><strong>{runner_form}</strong></span></p>
-    <p>When you catch your runner, get their Player ID then fill out <a href="https://forms.gle/ma3xJxzku99TfeiF8">our form.</a></p>
+    <p style="font-size: 1.5em;">Your Runner is <span style="color: #ffffff; background-color: #3e3874;"><strong>{runner_first_name} {runner_last_name}</strong></span>&nbsp;from&nbsp;<span style="color: #ffffff;background-color: #3e3874;"><strong>{runner_form}</strong></span></p>
+
+    <p>To catch your runner, place a peg on them, then obtain their player ID. Fill out the <a href="https://forms.gle/vorfm6X2JbiGdSbw8" target="_blank" rel="noopener">caught form</a> to report the catch!</p>
+    <p><a href="https://sites.google.com/newlands.school.nz/nc-chase/home" target="_blank" rel="noopener">Detailed rules and more information at our website.</a></p>
+    <h4><p>Runner not at school? Fill out our <a href="https://forms.gle/2KZcZPGYvRMftsDr6" target="_blank" rel="noopener">reassign form</a> to get a new runner.</p></h4>
+
+    <p>Remember to keep your Player ID secret!</p>
+    <p>Pegs must be clipped onto the body or clothing, not bags.</p>
     <br>
     <p style="font-size:1.2em;">This email was sent automatically - for assistance, reply to this email or message us on Instagram 
-    <a href="https://www.instagram.com/newlands.college.chase/">@newlands.college.chase</a></p>
+    <a href="https://www.instagram.com/newlands.college.chase/" target="_blank" rel="noopener">@newlands.college.chase</a></p>
     <h3>Telling a friend could be telling the enemy, so keep your lips sealed! Good luck.</h3>
+
+    <h2><a href="https://bit.ly/NCChase" target="_blank" rel="noopener">Chase21 Website</a></h2>
     """
 
 
@@ -86,9 +90,8 @@ def EmailRunners(year):
             runner_first_name = runner_first_names[person]
             runner_last_name = runner_last_names[person]
             runner_form = runner_forms[person]
-            runner_full_name = runner_first_name + runner_last_name
 
-            part_html = MIMEText(html_email.format(runner_form=runner_form, runner_full_name=runner_full_name,player_id=player_id), "html")
+            part_html = MIMEText(html_email.format(runner_form=runner_form, runner_first_name=runner_first_name, runner_last_name=runner_last_name, player_id=player_id), "html")
 
             message.attach(part_html)
 

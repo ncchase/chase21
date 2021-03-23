@@ -37,13 +37,15 @@ elif action_input == 4:
 
 # Setting Email Body
 html_email = """
-<h1><strong><span style="color: #ff0000;">Newlands College Chase21 Message</span></strong></h1>
+<h1><strong><span style="color: #ff0000;">Newlands College Chase 2021 Message</span></strong></h1>
 <p>Dear {first_name} {last_name},</p>
 <h3><span style="font-size: 16.38px;">You have been removed from the game for <span style="text-decoration: underline;">{reason}</span></span></h3>
 <h3><span style="font-size: 14px;">Action taken:&nbsp;<span style="text-decoration: underline;">{action}</span></span></h3>
 <p>Due to your actions, the above sanction has been put into place.</p>
-<p>If you disagree or would like to appeal this, please reply to this email.</p>
-<p style="font-size: 1.2em;">This email was sent automatically - for assistance, reply to this email or message us on Instagram <a href="https://www.instagram.com/newlands.college.chase/">@newlands.college.chase</a></p>
+<p>If you disagree or would like to appeal this, you can reach out by replying or messaging us on Instagram <a href="https://www.instagram.com/newlands.college.chase/" target="_blank" rel="noopener">@newlands.college.chase</a></p>
+<p style="font-size: 1.2em;">This email was sent automatically - for assistance, reply to this email or message us on Instagram <a href="https://www.instagram.com/newlands.college.chase/" target="_blank" rel="noopener">@newlands.college.chase</a></p>
+
+<h2><a href="https://bit.ly/NCChase" target="_blank" rel="noopener">Chase21 Website</a></h2>
 """
 
 
