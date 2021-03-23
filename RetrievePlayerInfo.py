@@ -23,7 +23,7 @@ def Retrieveinfo():
     
     # Creating (numpy) array of all players (includes all removed players)
     players = np.array([])
-    for year in range(9,14):
+    for year in range(9,13):
         year_sheet = sh.worksheet("YEAR" + str(year))
         year_removed_sheet = sh.worksheet("YEAR" + str(year) + "_REMOVED")
         year_sheet_data = np.array(year_sheet.get_all_values())

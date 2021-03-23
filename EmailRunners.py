@@ -24,10 +24,6 @@ def EmailRunners(year):
         gc = gspread.service_account(filename=service_account_12_filepath)
         sh = gc.open_by_key(spreadsheet_key)
         worksheet = sh.worksheet("YEAR12")
-    elif year == 13:
-        gc = gspread.service_account(filename=service_account_13_filepath)
-        sh = gc.open_by_key(spreadsheet_key)
-        worksheet = sh.worksheet("YEAR13")  
 
     # Creating variables
     print("Creating variables...")

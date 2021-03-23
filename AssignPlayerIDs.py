@@ -13,14 +13,14 @@ def AssignPlayerIDs():
     YEAR10 = sh.worksheet("YEAR10")
     YEAR11 = sh.worksheet("YEAR11")
     YEAR12 = sh.worksheet("YEAR12")
-    YEAR13 = sh.worksheet("YEAR13")
+    # YEAR13 = sh.worksheet("YEAR13") # YEAR 13 REMOVED
 
     # Getting Number of players in each year by getting length of list, of column of peoples first names. Minus once to exclude the header row.    
     NOY9 = len(YEAR9.col_values(2)) - 1
     NOY10 = len(YEAR10.col_values(2)) - 1
     NOY11 = len(YEAR11.col_values(2)) - 1
     NOY12 = len(YEAR12.col_values(2)) - 1
-    NOY13 = len(YEAR13.col_values(2)) - 1
+    # NOY13 = len(YEAR13.col_values(2)) - 1 # YEAR 13 REMOVED
 
     pre = 0
     list_of_letters = ["A", "B", "C", "D", "E", "F", "G", "H", "K", "M", "R", "T", "X"]
@@ -39,8 +39,8 @@ def AssignPlayerIDs():
     YEAR11.update("A2:A{}".format(NOY11 + 1), all_id_list[pre:NOY11 + pre])
     pre += NOY11
     YEAR12.update("A2:A{}".format(NOY12 + 1), all_id_list[pre:NOY12 + pre])
-    pre += NOY12
-    YEAR13.update("A2:A{}".format(NOY13 + 1), all_id_list[pre:NOY13 + pre])
+    # pre += NOY12
+    # YEAR13.update("A2:A{}".format(NOY13 + 1), all_id_list[pre:NOY13 + pre]) # YEAR 13 REMOVED
 
     
 confirmation = input("Are you sure you want to assign Player IDs? This will overwrite the existing IDs.\nTHIS IS IRREVERSIBLE\nYES or NO\n\n")

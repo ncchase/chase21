@@ -23,11 +23,6 @@ def EXAMPLE(year):
         sh = gc.open_by_key(spreadsheet_key)
         worksheet = sh.worksheet("YEAR12")
 
-    elif year == 13:
-        gc = gspread.service_account(filename=service_account_13_filepath)
-        sh = gc.open_by_key(spreadsheet_key)
-        worksheet = sh.worksheet("YEAR13")  
-
 # Accessing spreadsheet using random service account (keeps read limit load relatively even)
 # NOTE: import random
 service_acc_num = random.randint(1,5)
@@ -39,7 +34,5 @@ elif service_acc_num == 3:
     gc = gspread.service_account(filename=service_account_11_filepath)
 elif service_acc_num == 4:
     gc = gspread.service_account(filename=service_account_12_filepath)
-elif service_acc_num == 5:
-    gc = gspread.service_account(filename=service_account_13_filepath)
 sh = gc.open_by_key(spreadsheet_key)
     

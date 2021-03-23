@@ -69,11 +69,6 @@ def assignRunner(year):
         userList = sh.worksheet("YEAR12")
         numberOfPlayers = len(userList.col_values(2))
 
-    elif year == 13:
-        gc = gspread.service_account(filename=service_account_13_filepath)
-        sh = gc.open_by_key(spreadsheet_key)
-        userList = sh.worksheet("YEAR13")  
-        numberOfPlayers = len(userList.col_values(2))
 
     'assign runner to chaser'
 
