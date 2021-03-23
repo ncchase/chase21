@@ -49,5 +49,6 @@ if confirmation == "YES":
     AssignPlayerIDs()
     print("Player ID Assign Complete")
 else:
-    print("Cancelled")
+    print("Cancelled...")
+    
 
