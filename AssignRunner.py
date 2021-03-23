@@ -78,7 +78,11 @@ def assignRunner(year):
     'assign runner to chaser'
 
     playerInfo = list(userList.get("A2:F{}".format(numberOfPlayers + 1)))
+    
+    # print(playerInfo, "this is player info")
+    
     allPlayer, houseOrder, perfectGame = houseDivision(playerInfo)
+
     houseNum = 0
     for house in allPlayer:
         # the name of the house is corresponding to the current house list
