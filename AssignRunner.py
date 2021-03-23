@@ -121,13 +121,9 @@ def assignRunner(year):
     userList.update("G2:K1000", [i[8] for i in playerInfo])
     return perfectGame
 
-<<<<<<< HEAD
-assignRunner(10)
-=======
 if __name__ == "__main__":
     assignRunner(9)
     # assignRunner(10)
     # assignRunner(11)
     # assignRunner(12)
     # assignRunner(13)
->>>>>>> a57e35dc98c6da76bbcd123c15798fe1f04f19ee
