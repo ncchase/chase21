@@ -106,7 +106,7 @@ def assignRunner(year):
             # a player chasing after them
             playerInfo[pointer][7] += 1
             # add the ID of the runner to the chasers list
-            player.insert(8, playerInfo[pointer][0])
+            player.insert(8, playerInfo[pointer][0:3] + playerInfo[pointer][4:6])
             playerInfo[pointer].append(player[6])
             # move the pointer left because the player 
             # the pointer was pointing to 
@@ -117,7 +117,7 @@ def assignRunner(year):
         if i[7] != 1:
             perfectGame = False
             break
-    userList.update("G2:G1000", [[i[8]] for i in playerInfo])
+    userList.update("G2:K1000", [i[8] for i in playerInfo])
     return perfectGame
 
-assignRunner(9)
+assignRunner(10)
