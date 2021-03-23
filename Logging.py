@@ -3,7 +3,7 @@ from datetime import datetime
 from credentials import *
 
 # Webhook Config
-webhook = DiscordWebhook(url=discord_webhook_url, avatar_url="https://i.imgur.com/TBC.png", username="NC Chase Logging")
+webhook = DiscordWebhook(url=discord_webhook_url, avatar_url="https://i.imgur.com/70bpq7H.png", username="Chase21 Logging")
 
 def initialised(script_name):
     now = datetime.now()
@@ -16,11 +16,11 @@ def initialised(script_name):
     response = webhook.execute() # Send Webhook
     webhook.remove_embed(0) # Remove embed object
 
-def complete(script_name, data):
-    embed = DiscordEmbed(title="Completed script" + script_name, description="", color=0x008000)
-    embed.add_embed_field(name="TBC", value=data, inline=False)
+def complete(script_name, year, data):
+    embed = DiscordEmbed(title="Completed script " + script_name, description="", color=0x008000)
+    embed.add_embed_field(name="Year " + year, value=data, inline=False)
     webhook.add_embed(embed) # Add embed object to Webhook
-    response = webhook.execute() # Send Webhook
+    webhook.execute() # Send Webhook
     webhook.remove_embed(0) # Remove embed object
 
 def report():
@@ -32,7 +32,4 @@ def report():
     webhook.remove_embed(0) # Remove embed object
 
 if __name__ == "__main__":
-    initialised("namename")
-
-
-
+    complete("Example Script", "9", "testdata\nline2")
