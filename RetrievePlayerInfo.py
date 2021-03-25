@@ -1,6 +1,5 @@
 import gspread
 from credentials import *
-import random
 import numpy as np
 
 def Retrieveinfo():
