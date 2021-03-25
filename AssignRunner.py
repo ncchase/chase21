@@ -116,7 +116,7 @@ def assignRunner(year):
             break
     userList.update("G2:K1000", [i[8] for i in playerInfo])
 
-    Logging.complete("AssignRunner.py", year, "Perfect Game? - " + perfectGame)
+    Logging.complete("AssignRunner.py", year, "Perfect Game? - " + str(perfectGame))
 
     return perfectGame
 
