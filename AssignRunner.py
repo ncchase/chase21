@@ -42,7 +42,7 @@ def houseDivision(playerInfo):
     }
     # sort the dictionary by the number of players, then return a list of house names
     houseOrder = [k for k, v in sorted(houseOrder.items(), key = itemgetter(1), reverse = True)]
-    perfectGame = len(allPlayer[0]) < len(allPlayer[1] + allPlayer[2] + allPlayer[3])
+    perfectGame = True
     return allPlayer, houseOrder, perfectGame
 
 def assignRunner(year):
@@ -70,7 +70,6 @@ def assignRunner(year):
         userList = sh.worksheet("YEAR12")
         numberOfPlayers = len(userList.col_values(2))
 
-
     'assign runner to chaser'
 
     playerInfo = list(userList.get("A2:F{}".format(numberOfPlayers + 1)))
@@ -79,11 +78,8 @@ def assignRunner(year):
     
     allPlayer, houseOrder, perfectGame = houseDivision(playerInfo)
 
-    houseNum = 0
     for house in allPlayer:
         # the name of the house is corresponding to the current house list
-        houseName = houseOrder[houseNum]
-        houseNum += 1
         # shuffle the players so the runner is randomized
         # player = [ID, first, last, email, form, house, position, # of chasers]
         random.shuffle(playerInfo)
@@ -95,7 +91,7 @@ def assignRunner(year):
         pointer = -1
         for player in house:
             # look for players not in their house
-            while playerInfo[pointer][5] == houseName or playerInfo[pointer][-1] == player[0] :
+            while playerInfo[pointer][5] == player[5]:
                 # move pointer to the left
                 pointer -= 1
             # when we locate the pointer, we add 1 to the
@@ -122,8 +118,7 @@ def assignRunner(year):
 
 
 if __name__ == "__main__":
-    assignRunner(9)
-    # assignRunner(10)
-    # assignRunner(11)
-    # assignRunner(12)
-    # assignRunner(13)
+    assignRunner(9),
+    assignRunner(10),
+    assignRunner(11),
+    assignRunner(12),
