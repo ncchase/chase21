@@ -22,6 +22,7 @@ def houseDivision(playerInfo):
         player.append(position)
         position += 1
         player.append(chaser)
+        player.append(None)
         if player[5] == "Rimu":
             rimu.append(player)
         elif player[5] == "Matai":
@@ -91,7 +92,7 @@ def assignRunner(year):
         pointer = -1
         for player in house:
             # look for players not in their house
-            while playerInfo[pointer][5] == player[5]:
+            while playerInfo[pointer][5] == player[5] and player[0] != playerInfo[pointer][8]:
                 # move pointer to the left
                 pointer -= 1
             # when we locate the pointer, we add 1 to the
@@ -99,7 +100,7 @@ def assignRunner(year):
             # a player chasing after them
             playerInfo[pointer][7] += 1
             # add the ID of the runner to the chasers list
-            player.insert(8, playerInfo[pointer][0:3] + playerInfo[pointer][4:6])
+            player[8] = playerInfo[pointer][0:3] + playerInfo[pointer][4:6]
             playerInfo[pointer].append(player[6])
             # move the pointer left because the player 
             # the pointer was pointing to 
