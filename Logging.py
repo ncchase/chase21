@@ -25,10 +25,18 @@ def complete(script_name, year, data):
 
 def report():
     embed = DiscordEmbed(title="TITLE", description="description", color=0xFFFFFF)
-    embed.set_timestamp
+    embed.set_timestamp()
     embed.add_embed_field()
     webhook.add_embed(embed) # Add embed object to Webhook
     response = webhook.execute() # Send Webhook
+    webhook.remove_embed(0) # Remove embed object
+
+def invalidFormResponse(year, data):
+    embed = DiscordEmbed(title="Invalid Form Responses", color=0xFFA500)
+    embed.set_timestamp()
+    embed.add_embed_field(name="Year " + str(year), value=data, inline=False)
+    webhook.add_embed(embed) # Add embed object to Webhook
+    webhook.execute() # Send Webhook
     webhook.remove_embed(0) # Remove embed object
 
 if __name__ == "__main__":
