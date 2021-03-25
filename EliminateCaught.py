@@ -10,57 +10,38 @@ import logging
 
 def Eliminate():
 
-        service_acc_num = random.randint(1,4)
-        if service_acc_num == 1:
-            gc = gspread.service_account(filename=service_account_9_filepath)
-        elif service_acc_num == 2:
-            gc = gspread.service_account(filename=service_account_10_filepath)
-        elif service_acc_num == 3:
-            gc = gspread.service_account(filename=service_account_11_filepath)
-        elif service_acc_num == 4:
-            gc = gspread.service_account(filename=service_account_12_filepath)
-        sh = gc.open_by_key(spreadsheet_key)
+        gc = gspread.service_account(filename=service_account_13_filepath)
 
         # Importing data of ALL year groups + removed players sheets + caught form sheets + caught form removed sheets
         
         sh = gc.open_by_key(spreadsheet_key)
-        gc = gspread.service_account(filename=service_account_9_filepath)
         Y9Sheet = sh.worksheet("YEAR9")
         Y9 = np.array(Y9Sheet.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_9_filepath)
         Y9RSheet = sh.worksheet("YEAR9_REMOVED")
         Y9R = np.array(Y9RSheet.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_10_filepath)
         Y10Sheet = sh.worksheet("YEAR10")
         Y10 = np.array(Y10Sheet.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_9_filepath)
         Y10R = sh.worksheet("YEAR10_REMOVED")
         Y10 = np.array(Y10R.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_11_filepath)
         Y11Sheet = sh.worksheet("YEAR11")
         Y11 = np.array(Y11Sheet.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_9_filepath)
         Y11RSheet = sh.worksheet("YEAR11_REMOVED")
         Y11R = np.array(Y11RSheet.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_12_filepath)
         Y12Sheet = sh.worksheet("YEAR12")
         Y12 = np.array(Y12Sheet.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_9_filepath)
         Y12RSheet = sh.worksheet("YEAR12_REMOVED")
         Y12R = np.array(Y12RSheet.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_9_filepath)
         FCSheet = sh.worksheet("FORM_CAUGHT")
         FC = np.array(FCSheet.get_all_values())
 
-        gc = gspread.service_account(filename=service_account_9_filepath)
         FCRSheet = sh.worksheet("FORM_CAUGHT_REMOVED")
         FCR = np.array(FCRSheet.get_all_values())
 
