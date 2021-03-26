@@ -53,6 +53,9 @@ def Eliminate():
         Y11PTL = [[player, target] for player, target in zip(list(Y11[:,0]), list(Y11[:,6]))]
         Y12PTL = [[player, target] for player, target in zip(list(Y12[:,0]), list(Y12[:,6]))]
 
+        # Creating list of IDs for each year group
+        Y9ID, Y10ID, Y11ID, Y12ID = Y9[:,0], Y10[:,0], Y11[:,0], Y12[:,0]
+
         # Removing headings 
         del Y9PTL[0], Y10PTL[0], Y11PTL[0], Y12PTL[0]
 
@@ -70,6 +73,10 @@ def Eliminate():
         for pair_num in range(1,len(PTL) + 1):
             print(pair_num, "hello")
             if CF_PTL[pair_num] in PTL:
-                print("This is a real pair")
+                # Finding index of the runner in the main sh eet
 
-Eliminate()
+                if CF_PTL[pair_num] in Y9PTL:
+                    
+            
+if __name__ == "__main__":
+    Eliminate()
