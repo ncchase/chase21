@@ -62,7 +62,9 @@ def Eliminate():
     # Deleting Sheet
     print(len(Y9), "Y9LEN")
     Y9Sheet.delete_rows(2, len(Y9)+ 1)
-
+    Y10Sheet.delete_rows(2, len(Y10)+ 1)
+    Y11Sheet.delete_rows(2, len(Y11)+ 1)
+    Y12Sheet.delete_rows(2, len(Y12)+ 1)
 
     # Removing headings 
     # del Y9PTL[0], Y10PTL[0], Y11PTL[0], Y12PTL[0]
@@ -75,7 +77,7 @@ def Eliminate():
     # print(PTL)
     # print(len(PTL))
     
-    # Creating PTL list from the cuaght form
+    # Creating PTL list from the caught form
     CF_PTL = [[chaser, runner] for chaser, runner in zip(list(FC[:,2]), list(FC[:,3]))]
     print(CF_PTL, "CF_PTL")
     
@@ -139,6 +141,13 @@ def Eliminate():
     print(Y9R, Y10R, Y11R, Y12R)
     
 
+    Y9RSheet.append_rows(Y9R, value_input_option="USER_ENTERED")
+    Y10RSheet.append_rows(Y10R, value_input_option="USER_ENTERED")
+    Y11RSheet.append_rows(Y11R, value_input_option="USER_ENTERED")
+    Y12RSheet.append_rows(Y12R, value_input_option="USER_ENTERED")
+
+    
+
     # Deleting caught players from local version of sheet(s)
     for player in Y9R:
         print(Y9[player])
@@ -153,11 +162,14 @@ def Eliminate():
     # print(Y9)
     print(len(Y9))
 
-    Y9Sheet.update("A2:M" + str(len(Y9) + 1), Y9.tolist())
-    Y10Sheet.update("A2:M" + str(len(Y10) + 1), Y10.tolist())
-    Y11Sheet.update("A2:M" + str(len(Y11) + 1), Y11.tolist())
-    Y12Sheet.update("A2:M" + str(len(Y12) + 1), Y12.tolist())
+    # Update all player sheets to new version with removed players
+    Y9Sheet.update("A2:M" + str(len(Y9) + 1), Y9.tolist(), value_input_option="USER_ENTERED")
+    Y10Sheet.update("A2:M" + str(len(Y10) + 1), Y10.tolist(), value_input_option="USER_ENTERED")
+    Y11Sheet.update("A2:M" + str(len(Y11) + 1), Y11.tolist(), value_input_option="USER_ENTERED")
+    Y12Sheet.update("A2:M" + str(len(Y12) + 1), Y12.tolist(), value_input_option="USER_ENTERED")
 
+
+    
 if __name__ == "__main__":
     
     Eliminate()
