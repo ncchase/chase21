@@ -58,9 +58,6 @@ def Eliminate():
     # Creating list of IDs for each year group
     Y9ID, Y10ID, Y11ID, Y12ID = list(Y9[:,0]), list(Y10[:,0]), list(Y11[:,0]), list(Y12[:,0])
 
-
-
-
     # Removing headings 
     # del Y9PTL[0], Y10PTL[0], Y11PTL[0], Y12PTL[0]
 
@@ -77,18 +74,15 @@ def Eliminate():
     print(CF_PTL, "Caught form player:runner list")
     
     # Creating "remove" and "add point" lists
-    Y9R, Y10R, Y11R, Y12R = [], [], [], []
+    # Y9R, Y10R, Y11R, Y12R = [], [], [], []
     Y9AP, Y10AP, Y11AP, Y12AP = [], [], [], []
-
+    # Creating players-to-be-removed dictionary. Data is stored in "*player index*:*player data*" format
+    Y9R,Y10R,Y11R,Y12R = {}, {}, {}, {}
     # Iterating through entries in the CF Sheet
     for pair_num in range(0,(len(CF_PTL))):
 
         pair = CF_PTL[pair_num]
         chaser, runner = pair[0], pair[1]
-
-
-        # Creating players-to-be-removed dictionary. Data is stored in "*player index*:*player data*" format
-            # Y9R,Y10R,Y11R,Y12R = {}
             
         # Checking if player:target list exists at all (inefficient but too much effort to change rn)
         if CF_PTL[pair_num] in PTL:
@@ -96,17 +90,16 @@ def Eliminate():
 
             # Checks if the player:target pair exists in each sheet and if so, will add the runner to the "remove" list and the chaser to the "add one point list"
             if CF_PTL[pair_num] in Y9PTL:
-
-                Y9R.append(Y9ID.index(runner))
+                Y9R[Y9ID.index(runner)] = (Y9[(Y9ID.index(runner))]).tolist()
                 Y9AP.append(Y9ID.index(chaser))
             elif CF_PTL[pair_num] in Y10PTL:
-                Y10R.append(Y10ID.index(runner))
+                Y10R[Y9ID.index(runner)] = (Y10[Y10ID.index(runner)]).tolist()
                 Y10AP.append(Y10ID.index(chaser))
             elif CF_PTL[pair_num] in Y11PTL:
-                Y11R.append(Y11ID.index(runner))
+                Y11R[Y11ID.index(runner)] = (Y11[Y11ID.index(runner)]).tolist()
                 Y11AP.append(Y11ID.index(chaser))
             elif CF_PTL[pair_num] in Y12PTL:
-                Y12R.append(Y12ID.index(runner))
+                Y12R[Y12ID.index(runner)] = (Y12[Y12ID.index(runner)]).tolist()
                 Y12AP.append(Y12ID.index(chaser))
         else:
             # Code for invalid ID to be added here --> logging smth smth?
@@ -114,10 +107,10 @@ def Eliminate():
             print("Invalid ID", pair)
 
     # Printing removal and add point lists
-    print(Y9R, Y9AP, "Y9 R AP")
-    print(Y10R, Y10AP, "Y10 R AP")
-    print(Y11R, Y11AP, "Y11 R AP")
-    print(Y12R, Y12AP, "Y12 R AP")
+    # print(Y9R, Y9AP, "Y9 R AP")
+    # print(Y10R, Y10AP, "Y10 R AP")
+    # print(Y11R, Y11AP, "Y11 R AP")
+    # print(Y12R, Y12AP, "Y12 R AP")
 
     # Adding points to players who have caught their runners
     # AP = Add points 
@@ -139,37 +132,57 @@ def Eliminate():
         Y12[int(Y12CI), 11] = str(int(catches + 1))
     
     # Ordering deletion indexes so that deletion of one entry does not change the index of all other entries
-    Y9R.sort(reverse=True), Y10R.sort(reverse=True), Y11R.sort(reverse=True), Y12R.sort(reverse=True)
+    # YxRI = List of indexes to be removed
+    Y9RI, Y10RI, Y11RI, Y12RI = list(Y9R.keys()), list(Y10R.keys()), list(Y11R.keys()), list(Y12R.keys())
+
+
+    Y9RI.sort(reverse=True), Y10RI.sort(reverse=True), Y11RI.sort(reverse=True), Y12RI.sort(reverse=True)
 
     # print(Y9, Y10, Y11, Y12)
-    print(Y9R, Y10R, Y11R, Y12R, "Player indexes to be removed from each year sheet")
-    
+    print(Y9RI, Y10RI, Y11RI, Y12RI, "Player indexes to be removed from each year sheet")
+
     # Adding caught players into respective caught removed sheets
-    Y9RSheet.append_rows(Y9R, value_input_option="USER_ENTERED")
-    Y10RSheet.append_rows(Y10R, value_input_option="USER_ENTERED")
-    Y11RSheet.append_rows(Y11R, value_input_option="USER_ENTERED")
-    Y12RSheet.append_rows(Y12R, value_input_option="USER_ENTERED")
+    Y9RSheet.append_rows(list(Y9R.values()), value_input_option="USER_ENTERED")
+    Y10RSheet.append_rows(list(Y10R.values()), value_input_option="USER_ENTERED")
+    Y11RSheet.append_rows(list(Y11R.values()), value_input_option="USER_ENTERED")
+    Y12RSheet.append_rows(list(Y12R.values()), value_input_option="USER_ENTERED")
 
     # Deleting caught players from local version of sheet(s)
+    
     for player in Y9R:
-        print(Y9[player])
-        Y9 = np.delete(Y9, player, 0)
+        # print(Y9[player], "y9 player removed")
+
+        # I got an index error whenever the last person in the sheet is caught. I don't why I got the error but this fixes. I also do not
+        # know why this fixes it but yeah.
+        try:
+            Y9 = np.delete(Y9, player, 0)
+        except IndexError:
+            Y9 = np.delete(Y9, player- 2, 0)
     for player in Y10R:
-        Y10 = np.delete(Y10, player, 0)
+        try:
+            Y9 = np.delete(Y9, player, 0)
+        except IndexError:
+            Y9 = np.delete(Y9, player- 2, 0)        
     for player in Y11R:
-        Y11 = np.delete(Y11, player, 0)
+        try:
+            Y9 = np.delete(Y9, player, 0)
+        except IndexError:
+            Y9 = np.delete(Y9, player- 2, 0)
     for player in Y12R:
-        Y12 = np.delete(Y12, player, 0)
+        try:
+            Y9 = np.delete(Y9, player, 0)
+        except IndexError:
+            Y9 = np.delete(Y9, player- 2, 0)
 
     # print(Y9)
     print(len(Y9))
     
     # Deleting Sheet for updating
     # print(len(Y9), "Y9LEN")
-    Y9Sheet.delete_rows(2, len(Y9)+ 1)
-    Y10Sheet.delete_rows(2, len(Y10)+ 1)
-    Y11Sheet.delete_rows(2, len(Y11)+ 1)
-    Y12Sheet.delete_rows(2, len(Y12)+ 1)
+    Y9Sheet.delete_rows(2, len(Y9)+ 2)
+    Y10Sheet.delete_rows(2, len(Y10)+ 2)
+    Y11Sheet.delete_rows(2, len(Y11)+ 2)
+    Y12Sheet.delete_rows(2, len(Y12)+ 2)
     
     # Update all player sheets to new version with removed players
     Y9Sheet.update("A2:M" + str(len(Y9) + 1), Y9.tolist(), value_input_option="USER_ENTERED")
