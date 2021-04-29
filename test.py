@@ -1,7 +1,7 @@
-import numpy as np
+testdict = {1:"list", 2:"list2", 3:"list3"}
 
-arr = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
+print(list(testdict.values()))
 
-arr = np.delete(arr, 1, 0)
+for x in list(testdict.keys()):
 
-print(arr)
+    print(x)
