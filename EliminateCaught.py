@@ -104,21 +104,21 @@ def Eliminate():
                     print(pair)
                     exit()
             elif CF_PTL[pair_num] in Y10PTL:
-                # try:
+                try:
                     Y10R[Y10ID.index(runner)] = (Y10[Y10ID.index(runner)]).tolist()
                     Y10AP.append(Y10ID.index(chaser))
-                # except ValueError:
-                    # print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
-                    # print(pair)
-                    # exit()
+                except ValueError:
+                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    print(pair)
+                    exit()
             elif CF_PTL[pair_num] in Y11PTL:
-                # try:
+                try:
                     Y11R[Y11ID.index(runner)] = (Y11[Y11ID.index(runner)]).tolist()
                     Y11AP.append(Y11ID.index(chaser))
-                # except ValueError:
-                    # print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
-                    # print(pair)
-                    # exit()
+                except ValueError:
+                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    print(pair)
+                    exit()
             elif CF_PTL[pair_num] in Y12PTL:
                 try:
                     Y12R[Y12ID.index(runner)] = (Y12[Y12ID.index(runner)]).tolist()
@@ -182,30 +182,30 @@ def Eliminate():
         # I also do not know why this fixes it but yeah.
 
         try:
-            print(Y9[player], "Player removed")
+            # print(Y9[player], "Player removed")
             Y9 = np.delete(Y9, player, 0)
         except IndexError as err:
             print(err)
-            # Y9 = np.delete(Y9, player- 2, 0)
+            Y9 = np.delete(Y9, player- 2, 0)
             
     for player in Y10RI:
         
         try:
             Y10 = np.delete(Y10, player, 0)
         except IndexError as err:
-            # Y9 = np.delete(Y9, player- 2, 0) 
+            Y9 = np.delete(Y9, player- 2, 0) 
             print(err)       
     for player in Y11RI:
         try:
             Y11 = np.delete(Y11, player, 0)
         except IndexError as err:
-            # Y9 = np.delete(Y9, player- 2, 0)
+            Y9 = np.delete(Y9, player- 2, 0)
             print(err)
     for player in Y12RI:
         try:
             Y12 = np.delete(Y12, player, 0)
         except IndexError as err:
-            # Y9 = np.delete(Y9, player- 2, 0)
+            Y9 = np.delete(Y9, player- 2, 0)
             print(err)
   
     # Deleting Sheet for updating
@@ -216,7 +216,7 @@ def Eliminate():
     Y12Sheet.delete_rows(2, len(Y12)+ 2)
 
     # Removing all entries from caught form
-    # FCSheet.delete_rows(2, len(FC) + 2)
+    FCSheet.delete_rows(2, len(FC) + 2)
     
     print(len(Y9.tolist()), "Y9 len")
     print(len(Y10.tolist()), "Y10 len")
