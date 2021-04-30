@@ -70,14 +70,19 @@ def Eliminate():
     # print(len(PTL))
     
     # Creating PTL list from the caught form
-    CF_PTL = [[chaser, runner] for chaser, runner in zip(list(FC[:,2]), list(FC[:,3]))]
-    print(CF_PTL, "Caught form player:runner list")
-    
+    try:
+        CF_PTL = [[chaser, runner] for chaser, runner in zip(list(FC[:,2]), list(FC[:,3]))]
+        print(CF_PTL, "Caught form player:runner list")
+    except IndexError:
+
+        print("\n !!! IndexError - The caught form is likely empty !!! \n")
+        exit()
+
     # Creating "remove" and "add point" lists
-    # Y9R, Y10R, Y11R, Y12R = [], [], [], []
     Y9AP, Y10AP, Y11AP, Y12AP = [], [], [], []
     # Creating players-to-be-removed dictionary. Data is stored in "*player index*:*player data*" format
     Y9R,Y10R,Y11R,Y12R = {}, {}, {}, {}
+
     # Iterating through entries in the CF Sheet
     for pair_num in range(0,(len(CF_PTL))):
 
@@ -90,17 +95,34 @@ def Eliminate():
 
             # Checks if the player:target pair exists in each sheet and if so, will add the runner to the "remove" list and the chaser to the "add one point list"
             if CF_PTL[pair_num] in Y9PTL:
-                Y9R[Y9ID.index(runner)] = (Y9[(Y9ID.index(runner))]).tolist()
-                Y9AP.append(Y9ID.index(chaser))
+
+                try:
+                    Y9R[Y9ID.index(runner)] = (Y9[(Y9ID.index(runner))]).tolist()
+                    Y9AP.append(Y9ID.index(chaser))
+                except ValueError:
+                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    exit()
             elif CF_PTL[pair_num] in Y10PTL:
-                Y10R[Y9ID.index(runner)] = (Y10[Y10ID.index(runner)]).tolist()
-                Y10AP.append(Y10ID.index(chaser))
+                try:
+                    Y10R[Y9ID.index(runner)] = (Y10[Y10ID.index(runner)]).tolist()
+                    Y10AP.append(Y10ID.index(chaser))
+                except ValueError:
+                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    exit()
             elif CF_PTL[pair_num] in Y11PTL:
-                Y11R[Y11ID.index(runner)] = (Y11[Y11ID.index(runner)]).tolist()
-                Y11AP.append(Y11ID.index(chaser))
+                try:
+                    Y11R[Y11ID.index(runner)] = (Y11[Y11ID.index(runner)]).tolist()
+                    Y11AP.append(Y11ID.index(chaser))
+                except ValueError:
+                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    exit()
             elif CF_PTL[pair_num] in Y12PTL:
-                Y12R[Y12ID.index(runner)] = (Y12[Y12ID.index(runner)]).tolist()
-                Y12AP.append(Y12ID.index(chaser))
+                try:
+                    Y12R[Y12ID.index(runner)] = (Y12[Y12ID.index(runner)]).tolist()
+                    Y12AP.append(Y12ID.index(chaser))
+                except ValueError:
+                    print("\n !!! ValueError - Most likely cause a player exists within PTL list but is not contained within the live sheet \n")
+                    exit()
         else:
             # Code for invalid ID to be added here --> logging smth smth?
             # Save invalid entries to variable --> notify
@@ -134,8 +156,6 @@ def Eliminate():
     # Ordering deletion indexes so that deletion of one entry does not change the index of all other entries
     # YxRI = List of indexes to be removed
     Y9RI, Y10RI, Y11RI, Y12RI = list(Y9R.keys()), list(Y10R.keys()), list(Y11R.keys()), list(Y12R.keys())
-
-
     Y9RI.sort(reverse=True), Y10RI.sort(reverse=True), Y11RI.sort(reverse=True), Y12RI.sort(reverse=True)
 
     # print(Y9, Y10, Y11, Y12)
@@ -147,13 +167,16 @@ def Eliminate():
     Y11RSheet.append_rows(list(Y11R.values()), value_input_option="USER_ENTERED")
     Y12RSheet.append_rows(list(Y12R.values()), value_input_option="USER_ENTERED")
 
+    # Appending processed form entries into the "form caught removed" sheet
+    FCRSheet.append_rows(FC.tolist(), value_input_option="USER_ENTERED")
+
     # Deleting caught players from local version of sheet(s)
     
     for player in Y9R:
-        # print(Y9[player], "y9 player removed")
 
-        # I got an index error whenever the last person in the sheet is caught. I don't why I got the error but this fixes. I also do not
-        # know why this fixes it but yeah.
+        # I got an index error whenever the last person in the sheet is caught. I don't why I got the error but this fixes it. 
+        # I also do not know why this fixes it but yeah.
+
         try:
             Y9 = np.delete(Y9, player, 0)
         except IndexError:
@@ -173,25 +196,24 @@ def Eliminate():
             Y9 = np.delete(Y9, player, 0)
         except IndexError:
             Y9 = np.delete(Y9, player- 2, 0)
-
-    # print(Y9)
-    print(len(Y9))
-    
+  
     # Deleting Sheet for updating
     # print(len(Y9), "Y9LEN")
     Y9Sheet.delete_rows(2, len(Y9)+ 2)
     Y10Sheet.delete_rows(2, len(Y10)+ 2)
     Y11Sheet.delete_rows(2, len(Y11)+ 2)
     Y12Sheet.delete_rows(2, len(Y12)+ 2)
+
+    # Removing all entries from caught form
+    FCSheet.delete_rows(2, len(FC) + 2)
     
     # Update all player sheets to new version with removed players
     Y9Sheet.update("A2:M" + str(len(Y9) + 1), Y9.tolist(), value_input_option="USER_ENTERED")
     Y10Sheet.update("A2:M" + str(len(Y10) + 1), Y10.tolist(), value_input_option="USER_ENTERED")
     Y11Sheet.update("A2:M" + str(len(Y11) + 1), Y11.tolist(), value_input_option="USER_ENTERED")
     Y12Sheet.update("A2:M" + str(len(Y12) + 1), Y12.tolist(), value_input_option="USER_ENTERED")
-
-
     
+
 if __name__ == "__main__":
     
     Eliminate()
