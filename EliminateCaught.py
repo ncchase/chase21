@@ -101,27 +101,31 @@ def Eliminate():
                     Y9AP.append(Y9ID.index(chaser))
                 except ValueError:
                     print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    print(pair)
                     exit()
             elif CF_PTL[pair_num] in Y10PTL:
-                try:
-                    Y10R[Y9ID.index(runner)] = (Y10[Y10ID.index(runner)]).tolist()
+                # try:
+                    Y10R[Y10ID.index(runner)] = (Y10[Y10ID.index(runner)]).tolist()
                     Y10AP.append(Y10ID.index(chaser))
-                except ValueError:
-                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
-                    exit()
+                # except ValueError:
+                    # print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    # print(pair)
+                    # exit()
             elif CF_PTL[pair_num] in Y11PTL:
-                try:
+                # try:
                     Y11R[Y11ID.index(runner)] = (Y11[Y11ID.index(runner)]).tolist()
                     Y11AP.append(Y11ID.index(chaser))
-                except ValueError:
-                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
-                    exit()
+                # except ValueError:
+                    # print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    # print(pair)
+                    # exit()
             elif CF_PTL[pair_num] in Y12PTL:
                 try:
                     Y12R[Y12ID.index(runner)] = (Y12[Y12ID.index(runner)]).tolist()
                     Y12AP.append(Y12ID.index(chaser))
                 except ValueError:
                     print("\n !!! ValueError - Most likely cause a player exists within PTL list but is not contained within the live sheet \n")
+                    print(pair)
                     exit()
         else:
             # Code for invalid ID to be added here --> logging smth smth?
@@ -172,30 +176,37 @@ def Eliminate():
 
     # Deleting caught players from local version of sheet(s)
     
-    for player in Y9R:
+    for player in Y9RI:
 
         # I got an index error whenever the last person in the sheet is caught. I don't why I got the error but this fixes it. 
         # I also do not know why this fixes it but yeah.
 
         try:
+            print(Y9[player], "Player removed")
             Y9 = np.delete(Y9, player, 0)
-        except IndexError:
-            Y9 = np.delete(Y9, player- 2, 0)
-    for player in Y10R:
+        except IndexError as err:
+            print(err)
+            # Y9 = np.delete(Y9, player- 2, 0)
+            
+    for player in Y10RI:
+        
         try:
-            Y9 = np.delete(Y9, player, 0)
-        except IndexError:
-            Y9 = np.delete(Y9, player- 2, 0)        
-    for player in Y11R:
+            Y10 = np.delete(Y10, player, 0)
+        except IndexError as err:
+            # Y9 = np.delete(Y9, player- 2, 0) 
+            print(err)       
+    for player in Y11RI:
         try:
-            Y9 = np.delete(Y9, player, 0)
-        except IndexError:
-            Y9 = np.delete(Y9, player- 2, 0)
-    for player in Y12R:
+            Y11 = np.delete(Y11, player, 0)
+        except IndexError as err:
+            # Y9 = np.delete(Y9, player- 2, 0)
+            print(err)
+    for player in Y12RI:
         try:
-            Y9 = np.delete(Y9, player, 0)
-        except IndexError:
-            Y9 = np.delete(Y9, player- 2, 0)
+            Y12 = np.delete(Y12, player, 0)
+        except IndexError as err:
+            # Y9 = np.delete(Y9, player- 2, 0)
+            print(err)
   
     # Deleting Sheet for updating
     # print(len(Y9), "Y9LEN")
@@ -205,8 +216,13 @@ def Eliminate():
     Y12Sheet.delete_rows(2, len(Y12)+ 2)
 
     # Removing all entries from caught form
-    FCSheet.delete_rows(2, len(FC) + 2)
+    # FCSheet.delete_rows(2, len(FC) + 2)
     
+    print(len(Y9.tolist()), "Y9 len")
+    print(len(Y10.tolist()), "Y10 len")
+    print(len(Y11.tolist()), "Y11 len")
+    print(len(Y12.tolist()), "Y12 len")
+
     # Update all player sheets to new version with removed players
     Y9Sheet.update("A2:M" + str(len(Y9) + 1), Y9.tolist(), value_input_option="USER_ENTERED")
     Y10Sheet.update("A2:M" + str(len(Y10) + 1), Y10.tolist(), value_input_option="USER_ENTERED")
