@@ -4,12 +4,12 @@
     
 import gspread
 from credentials import *
-import random
 import numpy as np
-import logging
+import sys
+import Logging
 
 def Eliminate():
-
+    Logging.initialised("EliminateCaught.py")
     gc = gspread.service_account(filename=service_account_13_filepath)
 
     # Importing data of ALL year groups + removed players sheets + caught form sheets + caught form removed sheets
@@ -95,42 +95,44 @@ def Eliminate():
 
             # Checks if the player:target pair exists in each sheet and if so, will add the runner to the "remove" list and the chaser to the "add one point list"
             if CF_PTL[pair_num] in Y9PTL:
+                ValueErrorPrint = "\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n"
 
                 try:
                     Y9R[Y9ID.index(runner)] = (Y9[(Y9ID.index(runner))]).tolist()
                     Y9AP.append(Y9ID.index(chaser))
                 except ValueError:
-                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    print(ValueErrorPrint)
                     print(pair)
-                    exit()
+                    sys.exit(ValueErrorPrint)
             elif CF_PTL[pair_num] in Y10PTL:
                 try:
                     Y10R[Y10ID.index(runner)] = (Y10[Y10ID.index(runner)]).tolist()
                     Y10AP.append(Y10ID.index(chaser))
                 except ValueError:
-                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    print(ValueErrorPrint)
                     print(pair)
-                    exit()
+                    sys.exit(ValueErrorPrint)
             elif CF_PTL[pair_num] in Y11PTL:
                 try:
                     Y11R[Y11ID.index(runner)] = (Y11[Y11ID.index(runner)]).tolist()
                     Y11AP.append(Y11ID.index(chaser))
                 except ValueError:
-                    print("\n !!! ValueError - Most likely cause: a player exists within PTL list but is not contained within the live sheet !!! \n")
+                    print(ValueErrorPrint)
                     print(pair)
-                    exit()
+                    sys.exit(ValueErrorPrint)
             elif CF_PTL[pair_num] in Y12PTL:
                 try:
                     Y12R[Y12ID.index(runner)] = (Y12[Y12ID.index(runner)]).tolist()
                     Y12AP.append(Y12ID.index(chaser))
                 except ValueError:
-                    print("\n !!! ValueError - Most likely cause a player exists within PTL list but is not contained within the live sheet \n")
+                    print(ValueErrorPrint)
                     print(pair)
-                    exit()
+                    sys.exit(ValueErrorPrint)
         else:
             # Code for invalid ID to be added here --> logging smth smth?
             # Save invalid entries to variable --> notify
             print("Invalid ID", pair)
+            Logging.invalidFormResponse(0, pair) #Log error to gameplay logs.
 
     # Printing removal and add point lists
     # print(Y9R, Y9AP, "Y9 R AP")
