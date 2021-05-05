@@ -32,7 +32,7 @@ def report():
     webhook.remove_embed(0) # Remove embed object
 
 def invalidFormResponse(year, data):
-    embed = DiscordEmbed(title="Invalid Form Responses", color=0xFFA500)
+    embed = DiscordEmbed(title="Invalid Form Response", color=0xFFA500)
     embed.set_timestamp()
     embed.add_embed_field(name="Year " + str(year), value=str(data), inline=False)
     webhook.add_embed(embed) # Add embed object to Webhook
