@@ -111,7 +111,7 @@ def assignRunner(year):
         if i[7] != 1:
             perfectGame = False
             break
-    userList.update("G2:K1000", [i[8] for i in playerInfo])
+    userList.update("G2:K1000", [i[8] for i in playerInfo], value_input_option="USER_ENTERED")
 
     Logging.complete("AssignRunner.py", year, "Perfect Game? - " + str(perfectGame))
 

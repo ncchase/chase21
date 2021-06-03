@@ -64,7 +64,7 @@ def EmailRunners(year):
 
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "NC Chase21 Exec -  " + day + " " + date + "/" + month
+    message["Subject"] = "NC Chase21-  " + day + " " + date + "/" + month
     message["From"] = "Gamemaster <gamemaster@newlands.school.nz>"
     message["To"] = "Players <NC-Chase21>"
     # message["Reply-To"] = ""
