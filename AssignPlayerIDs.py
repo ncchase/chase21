@@ -32,13 +32,13 @@ def AssignPlayerIDs():
 
     shuffle(all_id_list)
     
-    YEAR9.update("A2:A{}".format(NOY9 + 1), all_id_list[:NOY9])
+    YEAR9.update("A2:A{}".format(NOY9 + 1), all_id_list[:NOY9], value_input_option="USER_ENTERED")
     pre += NOY9
-    YEAR10.update("A2:A{}".format(NOY10 + 1), all_id_list[pre:NOY10 + pre])
+    YEAR10.update("A2:A{}".format(NOY10 + 1), all_id_list[pre:NOY10 + pre], value_input_option="USER_ENTERED")
     pre += NOY10
-    YEAR11.update("A2:A{}".format(NOY11 + 1), all_id_list[pre:NOY11 + pre])
+    YEAR11.update("A2:A{}".format(NOY11 + 1), all_id_list[pre:NOY11 + pre], value_input_option="USER_ENTERED")
     pre += NOY11
-    YEAR12.update("A2:A{}".format(NOY12 + 1), all_id_list[pre:NOY12 + pre])
+    YEAR12.update("A2:A{}".format(NOY12 + 1), all_id_list[pre:NOY12 + pre], value_input_option="USER_ENTERED")
     # pre += NOY12
     # YEAR13.update("A2:A{}".format(NOY13 + 1), all_id_list[pre:NOY13 + pre]) # YEAR 13 REMOVED
 

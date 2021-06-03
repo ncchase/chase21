@@ -70,6 +70,6 @@ def reassign():
                 j -= 1
             year_level[i][6] = year_level_copy.pop(j)
             j -= 1
-        info.update('G2:H1000', [i[6] for i in year_level])
+        info.update('G2:H1000', [i[6] for i in year_level], value_input_option="USER_ENTERED")
 
 reassign()
