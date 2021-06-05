@@ -14,15 +14,31 @@ def EmailCaught():
         sh = gc.open_by_key(spreadsheet_key)
         # worksheet = sh.worksheet("YEAR9")
 
-        for years in range(9,13):
+        # Creating variables for tiem and date (these go in the subject of the email)
+        print("Creating variables...")
+        now = datetime.now()  # current date and time
+        date = now.strftime("%d")
+        month = now.strftime("%m")
+        day = now.strftime("%A")
 
-            sheet = sh.worksheet("YEAR" + str(years) + "_REMOVED")
+        for year in range(9,13):
+            
+            # Retrieving sheet and putting it into an array
+            sheet = sh.worksheet("YEAR" + str(year) + "_REMOVED")
             sheet_data = sheet.get_all_values()[1:]
 
-            for student in sheet_data:
+            if len(sheet_data) != 0:
+
+                # for student in sheet_data:
 
                 html_email = """
-
+                <h1><strong>Newlands College Chase 2021 <span style="color: #ff0000;">Caught Notice</span></strong></h1>
+                <h4>Sadly, for you, the game is over... You have been caught by your Chaser...</h4>
+                <p>You will no longer receive a runner, or have someone chasing you. However, you can still help your house, or participate in other Chase21 Events!</p>
+                <p>If you disagree or have any questions, you can reach out by replying or messaging us on Instagram <a href="https://www.instagram.com/newlands.college.chase/" target="_blank" rel="noopener">@newlands.college.chase</a></p>
+                <i>Your battle was a fierce one, one of deception, one of wit, one that sadly, <strong>you lost.</strong></i>
+                <p style="font-size: 1.2em;">This email was sent automatically - for assistance, reply to this email or message us on Instagram <a href="https://www.instagram.com/newlands.college.chase/" target="_blank" rel="noopener">@newlands.college.chase</a></p>
+                <h2><a href="https://bit.ly/NCChase" target="_blank" rel="noopener">Chase21 Website</a></h2>
                 """
 
                 message = MIMEMultipart("alternative")
@@ -40,29 +56,37 @@ def EmailCaught():
                     server.ehlo_or_helo_if_needed() # Greet the server
                     # server.starttls() # Establish Secure Connection with server
 
+                    # print(email_address, email_password, "email details")
                     server.login(email_address, email_password)
+                    
+                    # counter creation so that the script pauses for 30 seconds every 30 emails it sends.
+                    counter = 0
 
-                    for person in range(len(emails)):
+                    for student in sheet_data:
                         
-                        if person % 30 == 0:
+                        if counter % 30 == 0:
                             time.sleep(31)
 
-                        receiver_email = emails[person]
-                        player_id = IDS[person]
-                        runner_first_name = runner_first_names[person]
-                        runner_last_name = runner_last_names[person]
-                        runner_form = runner_forms[person]
+                        # Retrieving email of recipient & that persons ID.
+                        receiver_email = student[3]
+                        player_id = student[0]
 
-                        part_html = MIMEText(html_email.format(runner_form=runner_form, runner_first_name=runner_first_name, runner_last_name=runner_last_name, player_id=player_id), "html")
-
+                        # Creating, attaching and sending the email
+                        part_html = MIMEText(html_email.format(player_id=player_id), "html")
                         message.attach(part_html)
-
                         server.sendmail(email_address, receiver_email, message.as_string())
 
-                        # print("Email sent to " + receiver_email)
-                # print(str(person + 1) + " emails sent")
-                Logging.complete("EmailRunners.py", year, str(person+1) + " emails sent")
+                        # Increasing counter by one
+                        counter += 1
 
+                # print(str(person + 1) + " emails sent")
+
+                # Send logging message that an email has been sent.
+                Logging.complete("EmailRunners.py", year, str(counter) + " email(s) sent")
+            
+            else:
+                # Loggin message if there are no players removed
+                Logging.complete("EmailRunners.py", year, "0 emails sent")
 
 if __name__ == "__main__":
 
