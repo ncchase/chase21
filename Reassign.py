@@ -10,7 +10,7 @@ gc = gspread.service_account(filename=service_account_9_filepath)
 sh = gc.open_by_key(spreadsheet_key)
 
 def get_requests_from_sheet():
-    userlist = sh.worksheet('Form responses 3').get('A2:D1000')
+    userlist = sh.worksheet('FORM_REASSIGN').get('A2:D1000')
     year9 = []
     year10 = []
     year11 = []
@@ -21,11 +21,12 @@ def get_requests_from_sheet():
         player[0] = datetime.strptime(player[0], "%d/%m/%Y %H:%M:%S")
         # date validation
         if player[0].day == datetime.now().day:
-            if player[2] == 'Year 9':
+            if player[3] == 'Year 9':
+                print('Year 9')
                 year9.append(player)
-            elif player[2] == 'Year 10':
+            elif player[3] == 'Year 10':
                 year10.append(player)
-            elif player[2] == 'Year 11':
+            elif player[3] == 'Year 11':
                 year11.append(player)
             else:
                 year12.append(player)
@@ -50,6 +51,7 @@ def reassign():
         info = sh.worksheet('YEAR9')
         not_here = []
         rows_need_reassign = []
+        # j is the index of the chasers who need a new runner
         j = 0
         # loop through requests
         # record players who is not here
@@ -60,15 +62,17 @@ def reassign():
             rows_need_reassign.append(j)
             j += 1
         random.shuffle(year_level_copy)
-        year_level_copy.sort(key = itemgetter(11), reverse = True)
+        # sort by number of chasers to ensure fair games
+        year_level_copy.sort(key = itemgetter(13), reverse = True)
         heapq.heapify(year_level_copy)
+        # assign 
         for i in rows_need_reassign:
             j = -1
-            while (year_level[i][5] == year_level_copy[j][5] 
-            or year_level[i][6] == year_level_copy[j][0] 
-            or year_level_copy[j][0] in not_here):
+            while (year_level[i][5] == year_level_copy[j][5] # in the same house
+            or year_level_copy[j][0] in not_here): # or not not here
                 j -= 1
             year_level[i][6] = year_level_copy.pop(j)
+            year_level[i][12] += 1
             j -= 1
         info.update('G2:H1000', [i[6] for i in year_level], value_input_option="USER_ENTERED")
 
