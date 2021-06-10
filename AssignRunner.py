@@ -1,8 +1,8 @@
 import gspread
 import random
 from operator import itemgetter
-from credentials import *
-import Logging
+from example_credentials import *
+# import Logging
 
 def houseDivision(playerInfo):
     "Put players into their house group"
@@ -111,15 +111,16 @@ def assignRunner(year):
         if i[7] != 1:
             perfectGame = False
             break
+    userList.update("N2:N1000", [[i[7]] for i in playerInfo])
     userList.update("G2:K1000", [i[8] for i in playerInfo], value_input_option="USER_ENTERED")
 
-    Logging.complete("AssignRunner.py", year, "Perfect Game? - " + str(perfectGame))
+    # Logging.complete("AssignRunner.py", year, "Perfect Game? - " + str(perfectGame))
 
     return perfectGame
 
 
 if __name__ == "__main__":
     assignRunner(9),
-    assignRunner(10),
-    assignRunner(11),
-    assignRunner(12),
+    # assignRunner(10),
+    # assignRunner(11),
+    # assignRunner(12),
