@@ -35,10 +35,10 @@ def EmailRunners(year):
 
     # Getting Values from Sheet. NOTE NUMBERS ARE 1 BASED.
     IDS = worksheet.col_values(1) 
-    emails = worksheet.col_values(6)
-    runner_first_names = worksheet.col_values(7)
-    runner_last_names = worksheet.col_values(7)
-    runner_forms = worksheet.col_values(9)
+    emails = worksheet.col_values(4)
+    runner_first_names = worksheet.col_values(8)
+    runner_last_names = worksheet.col_values(9)
+    runner_forms = worksheet.col_values(10)
 
     # Delete headers from each column
     del IDS[0], emails[0], runner_first_names[0], runner_last_names[0], runner_forms[0]
@@ -64,7 +64,7 @@ def EmailRunners(year):
 
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "NC Chase21-  " + day + " " + date + "/" + month
+    message["Subject"] = "NC Chase21 -  " + day + " " + date + "/" + month
     message["From"] = "Gamemaster <gamemaster@newlands.school.nz>"
     message["To"] = "Players <NC-Chase21>"
     # message["Reply-To"] = ""
