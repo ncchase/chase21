@@ -1,7 +1,7 @@
 import gspread
 import random
 from operator import itemgetter
-from example_credentials import *
+from credentials import *
 # import Logging
 
 def houseDivision(playerInfo):

@@ -1,4 +1,4 @@
-from example_credentials import *
+from credentials import *
 from operator import itemgetter
 import gspread
 from datetime import datetime
